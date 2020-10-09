@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Plasm Network | DeFi.SURF</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<!--<script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>-->
+<script src="https://cdn.amcharts.com/lib/4/plugins/rangeSelector.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<!-- Chart code -->
+<style>
+#durationpie {
+  width: 100%;
+  height: 300px;
+}
+
+body {
+  font-family: 'Montserrat';
+}
+
+#refs {
+  width: 100%;
+  height: 600px;
+}
+
+#refseth {
+  width: 100%;
+  height: 600px;
+}
+
+#top20 {
+  width: 100%;
+  height: 400px;
+}
+
+#radar {
+  width: 100%;
+  height: 400px;
+}
+
+#mchart {
+  width: 100%;
+  height: 400px;
+}
+
+#wchart {
+  width: 100%;
+  height: 300px;
+}
+</style>
+
+<script>
+
+WebFont.load({
+google: {
+  families: ["Montserrat:500","Montserrat:700"]
+},
+active: function() {
+  console.log("All set!");
+}
+});
+
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+//am4core.useTheme(am4themes_dark);
+
+function am4themes_myTheme(target) {
+  if (target instanceof am4core.ColorSet) {
+    target.list = [
+      am4core.color("#2179ee"),
+      am4core.color("#7537ef"),
+      am4core.color("#56408B"),
+      am4core.color("#56ccf2"),
+      am4core.color("#1d417f"),
+      am4core.color("#7537ef")
+    ];
+  }
+}
+
+//am4core.useTheme(am4themes_myTheme);
+// Themes end
+
+//Master CHart TVL
+// Create chart instance
+var mchart = am4core.create("mchart", am4charts.XYChart);
+
+//
+
+// Increase contrast by taking evey second color
+mchart.colors.step = 2;
+mchart.numberFormatter.numberFormat = "#a";
+mchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+// Add data
+mchart.data = [
+{"Date":"2020-03-15","ETH":"351.1601000224982","Deposits":"21","cumulative_deposits":"21","cumulative_eth":"351.1601000224982"},
+{"Date":"2020-03-16","ETH":"182.91000006906688","Deposits":"17","cumulative_deposits":"38","cumulative_eth":"534.0701000915651"},
+{"Date":"2020-03-17","ETH":"492.29099957074504","Deposits":"13","cumulative_deposits":"51","cumulative_eth":"1026.3610996623102"},
+{"Date":"2020-03-18","ETH":"67.27599977503996","Deposits":"11","cumulative_deposits":"62","cumulative_eth":"1093.6370994373501"},
+{"Date":"2020-03-19","ETH":"18.310000063851476","Deposits":"10","cumulative_deposits":"72","cumulative_eth":"1111.9470995012016"},
+{"Date":"2020-03-20","ETH":"0.09600000083446503","Deposits":"1","cumulative_deposits":"73","cumulative_eth":"1112.043099502036"},
+{"Date":"2020-03-21","ETH":"32.20000000298023","Deposits":"3","cumulative_deposits":"76","cumulative_eth":"1144.2430995050163"},
+{"Date":"2020-03-22","ETH":"6.144999980926514","Deposits":"1","cumulative_deposits":"77","cumulative_eth":"1150.3880994859428"},
+{"Date":"2020-03-23","ETH":"654.1861014256065","Deposits":"9","cumulative_deposits":"86","cumulative_eth":"1804.5742009115493"},
+{"Date":"2020-03-24","ETH":"244.7325800392755","Deposits":"12","cumulative_deposits":"98","cumulative_eth":"2049.3067809508248"},
+{"Date":"2020-03-25","ETH":"55","Deposits":"4","cumulative_deposits":"102","cumulative_eth":"2104.3067809508248"},
+{"Date":"2020-03-26","ETH":"1.0199999995529652","Deposits":"2","cumulative_deposits":"104","cumulative_eth":"2105.3267809503777"},
+{"Date":"2020-03-27","ETH":"19.46000002324581","Deposits":"5","cumulative_deposits":"109","cumulative_eth":"2124.7867809736235"},
+{"Date":"2020-03-28","ETH":"5.497999921441078","Deposits":"3","cumulative_deposits":"112","cumulative_eth":"2130.2847808950646"},
+{"Date":"2020-03-29","ETH":"139.299999833107","Deposits":"4","cumulative_deposits":"116","cumulative_eth":"2269.5847807281716"},
+{"Date":"2020-03-30","ETH":"210.6539195664227","Deposits":"17","cumulative_deposits":"133","cumulative_eth":"2480.2387002945943"},
+{"Date":"2020-03-31","ETH":"153.92400002479553","Deposits":"8","cumulative_deposits":"141","cumulative_eth":"2634.16270031939"},
+{"Date":"2020-04-01","ETH":"101.49769945815206","Deposits":"11","cumulative_deposits":"152","cumulative_eth":"2735.660399777542"},
+{"Date":"2020-04-02","ETH":"67.42999982833862","Deposits":"10","cumulative_deposits":"162","cumulative_eth":"2803.0903996058805"},
+{"Date":"2020-04-03","ETH":"270.45999965816736","Deposits":"3","cumulative_deposits":"165","cumulative_eth":"3073.550399264048"},
+{"Date":"2020-04-04","ETH":"22.800000071525574","Deposits":"4","cumulative_deposits":"169","cumulative_eth":"3096.3503993355735"},
+{"Date":"2020-04-05","ETH":"2586.8399928584695","Deposits":"18","cumulative_deposits":"187","cumulative_eth":"5683.190392194043"},
+{"Date":"2020-04-06","ETH":"107.10000005364418","Deposits":"5","cumulative_deposits":"192","cumulative_eth":"5790.290392247687"},
+{"Date":"2020-04-07","ETH":"1642.0100003834814","Deposits":"16","cumulative_deposits":"208","cumulative_eth":"7432.3003926311685"},
+{"Date":"2020-04-08","ETH":"176.61000000871718","Deposits":"10","cumulative_deposits":"218","cumulative_eth":"7608.910392639886"},
+{"Date":"2020-04-09","ETH":"36.20000010728836","Deposits":"6","cumulative_deposits":"224","cumulative_eth":"7645.110392747174"},
+{"Date":"2020-04-10","ETH":"202.17129492759705","Deposits":"7","cumulative_deposits":"231","cumulative_eth":"7847.281687674771"},
+{"Date":"2020-04-11","ETH":"258.51999999955297","Deposits":"15","cumulative_deposits":"246","cumulative_eth":"8105.801687674324"},
+{"Date":"2020-04-12","ETH":"3315.356999700889","Deposits":"23","cumulative_deposits":"269","cumulative_eth":"11421.158687375213"},
+{"Date":"2020-04-13","ETH":"2019.1668006815016","Deposits":"60","cumulative_deposits":"329","cumulative_eth":"13440.325488056715"},
+{"Date":"2020-04-14","ETH":"3342.8870131857693","Deposits":"39","cumulative_deposits":"368","cumulative_eth":"16783.212501242484"}
+]
+;
+
+// Create axes
+var dateAxis = mchart.xAxes.push(new am4charts.DateAxis());
+dateAxis.renderer.minGridDistance = 50;
+dateAxis.renderer.grid.template.location = 0;
+dateAxis.renderer.ticks.template.length = 8;
+dateAxis.renderer.ticks.template.strokeOpacity = 0.1;
+dateAxis.renderer.grid.template.disabled = true;
+dateAxis.renderer.ticks.template.disabled = false;
+dateAxis.renderer.ticks.template.strokeOpacity = 0.2;
+dateAxis.renderer.minLabelPosition = 0.01;
+dateAxis.renderer.maxLabelPosition = 0.99;
+dateAxis.keepSelection = true;
+
+dateAxis.groupData = true;
+dateAxis.minZoomCount = 5;
+
+// Create series
+function createAxisAndSeries(field, name, opposite, bullet) {
+  var valueAxis = mchart.yAxes.push(new am4charts.ValueAxis());
+  if(mchart.yAxes.indexOf(valueAxis) != 0){
+    valueAxis.syncWithAxis = mchart.yAxes.getIndex(0);
+  }
+  
+  var mseries = mchart.series.push(new am4charts.LineSeries());
+  mseries.dataFields.valueY = field;
+  mseries.dataFields.dateX = "Date";
+  mseries.strokeWidth = 2;
+  mseries.yAxis = valueAxis;
+  mseries.name = name;
+  mseries.tooltipText = "{name}: [bold]{valueY}[/]";
+  mseries.tensionX = 0.8;
+  mseries.showOnInit = true;
+ // mseries.yAxis.title.text = "ETH";
+  
+  var interfaceColors = new am4core.InterfaceColorSet();
+  
+  switch(bullet) {
+    case "triangle":
+      var bullet = mseries.bullets.push(new am4charts.Bullet());
+      bullet.width = 12;
+      bullet.height = 12;
+      bullet.horizontalCenter = "middle";
+      bullet.verticalCenter = "middle";
+      
+      var triangle = bullet.createChild(am4core.Triangle);
+      triangle.stroke = interfaceColors.getFor("background");
+      triangle.strokeWidth = 2;
+      triangle.direction = "top";
+      triangle.width = 12;
+      triangle.height = 12;
+      break;
+    case "rectangle":
+      var bullet = mseries.bullets.push(new am4charts.Bullet());
+      bullet.width = 10;
+      bullet.height = 10;
+      bullet.horizontalCenter = "middle";
+      bullet.verticalCenter = "middle";
+      
+      var rectangle = bullet.createChild(am4core.Rectangle);
+      rectangle.stroke = interfaceColors.getFor("background");
+      rectangle.strokeWidth = 2;
+      rectangle.width = 10;
+      rectangle.height = 10;
+      break;
+    default:
+      var bullet = mseries.bullets.push(new am4charts.CircleBullet());
+      bullet.circle.stroke = interfaceColors.getFor("background");
+      bullet.circle.strokeWidth = 2;
+      break;
+  }
+  
+  valueAxis.renderer.line.strokeOpacity = 1;
+  valueAxis.renderer.line.strokeWidth = 2;
+  valueAxis.renderer.line.stroke = mseries.stroke;
+  valueAxis.renderer.labels.template.fill = mseries.stroke;
+  valueAxis.renderer.opposite = opposite;
+  //valueAxis.title.text = "ETH";
+}
+
+createAxisAndSeries("Deposits", "Locks", false, "circle");
+createAxisAndSeries("ETH", "ETH", false, "circle");
+createAxisAndSeries("cumulative_deposits", "Total Locks", false, "rectangle");
+createAxisAndSeries("cumulative_eth", "Total ETH", false, "rectangle");
+
+
+
+// Add legend
+mchart.legend = new am4charts.Legend();
+
+// Add cursor
+mchart.cursor = new am4charts.XYCursor();
+mchart.cursor.xAxis = dateAxis;
+
+
+//Add Scrollbar
+mchart.scrollbarX = new am4core.Scrollbar();
+
+//END Master Chart TVL
+
+//WEEKLY
+var wchart = am4core.create("wchart", am4charts.XYChart);
+wchart.numberFormatter.numberFormat = "#a";
+wchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+wchart.data = [{
+  "name": "Week 1",
+  "startTime": 0,
+  "endTime": 1150.38,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 2",
+  "startTime": 1150.38,
+  "endTime": 2269.58,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 3",
+  "startTime": 2269.58,
+  "endTime": 5683.19,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 4",
+  "startTime": 5683.19,
+  "endTime": 11421.15,
+  "color": wchart.colors.next()
+}, {
+  "name": "Last 2 Days",
+  "startTime": 11421.15,
+  "endTime": 16783.21,
+  "color": wchart.colors.next()
+}];
+
+var categoryAxis = wchart.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "name";
+categoryAxis.renderer.inversed = true;
+categoryAxis.renderer.grid.template.location = 0;
+
+var valueAxis = wchart.xAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.minGridDistance = 50;
+valueAxis.title.text = "ETH";
+
+var columnSeries = wchart.series.push(new am4charts.ColumnSeries());
+columnSeries.dataFields.categoryY = "name";
+columnSeries.dataFields.valueX = "endTime";
+columnSeries.dataFields.openValueX = "startTime";
+columnSeries.calculatePercent = true;
+columnSeries.columns.template.tooltipText = "[bold]{categoryY}[/]\n{valueX.percent} %";
+
+var columnTemplate = columnSeries.columns.template;
+columnTemplate.strokeOpacity = 0;
+columnTemplate.propertyFields.fill = "color";
+columnTemplate.height = am4core.percent(100);
+
+//TOP 20
+var topchart = am4core.create("top20", am4charts.XYChart);
+topchart.numberFormatter.numberFormat = "#a";
+topchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+topchart.data = [
+{"Address":"0xbDCEe87119265FC0ec27a3113EFC3fBBB90D4D7b","Locked":"2700"},
+{"Address":"0xF0A355A5AB3D96A4347E9Fe3052EF39357DF90D0","Locked":"1500.050000000745"},
+{"Address":"0x91715128a71c9C734CDC20E5EdEEeA02E72e428E","Locked":"1232"},
+{"Address":"0xcBF111366e51CA8E90180D0EE2C7FED9D2BD62dC","Locked":"1200"},
+{"Address":"0xcddc876165579BDDbebf2EA6DdACAa54896b2B6a","Locked":"999.989990234375"},
+{"Address":"0x2411605A576fe058483382C1db691318056eBaaD","Locked":"515"},
+{"Address":"0xE81ff5A7f528c660cb41Facedd53485e20Ea2758","Locked":"506"},
+{"Address":"0xCBD0EdBf33209E309B88c86772de17012d586fD6","Locked":"417"},
+{"Address":"0x6dbc25e9CcB0995B935a4107953bA98563ED6C6f","Locked":"400"},
+{"Address":"0x2AAAF3e244B493F9F1e1A0Ec17ff344109900842","Locked":"400"},
+{"Address":"0xC8E99360D5b672D66610B0db0807611fe954CcF9","Locked":"261"},
+{"Address":"0x798121BEF71DAfCff3D046E4C29893675f4eD503","Locked":"250"},
+{"Address":"0x37AD9F5cB15867156bd75e76b8D9eDC40fc077a8","Locked":"250"},
+{"Address":"0xbdde562d6C0a3440806e13fd69D6e28C0cB452Ca","Locked":"206.10000000149012"},
+{"Address":"0xCcb12611039c7CD321c0F23043c841F1d97287A5","Locked":"200"},
+{"Address":"0x880c4F74C3d4C39D75F8e2aD958F40671416bf66","Locked":"200"},
+{"Address":"0xC5C510Ae135b70A12a6bE47D0e8EC072E9c62610","Locked":"200"},
+{"Address":"0x2ECd81E43C1F66185446F4af7DfEAa6AAE249f55","Locked":"200"},
+{"Address":"0xe6410EcBaA041A5dCDe79164CA66dE42A8D72beE","Locked":"200"},
+{"Address":"0xD77Caf4C72C635e0eE0853694607CB567C06653d","Locked":"174.1199951171875"}
+];
+
+var topcategoryAxis = topchart.xAxes.push(new am4charts.CategoryAxis());
+topcategoryAxis.renderer.grid.template.location = 0;
+topcategoryAxis.dataFields.category = "Address";
+topcategoryAxis.renderer.minGridDistance = 10;
+topcategoryAxis.renderer.grid.template.location = 0.5;
+topcategoryAxis.renderer.grid.template.strokeDasharray = "1,3";
+topcategoryAxis.renderer.labels.template.rotation = -90;
+topcategoryAxis.renderer.labels.template.horizontalCenter = "left";
+topcategoryAxis.renderer.labels.template.location = 0.5;
+topcategoryAxis.renderer.labels.template.disabled = true;
+
+topcategoryAxis.renderer.labels.template.adapter.add("dx", function(dx, target) {
+    return -target.maxRight / 2;
+})
+
+var topvalueAxis = topchart.yAxes.push(new am4charts.ValueAxis());
+topvalueAxis.tooltip.disabled = true;
+topvalueAxis.renderer.ticks.template.disabled = true;
+topvalueAxis.renderer.axisFills.template.disabled = true;
+topvalueAxis.title.text = "ETH";
+
+var topseries = topchart.series.push(new am4charts.ColumnSeries());
+topseries.dataFields.categoryX = "Address";
+topseries.dataFields.valueY = "Locked";
+topseries.tooltipText = "{valueY.value} ETH";
+topseries.sequencedInterpolation = true;
+topseries.fillOpacity = 0;
+topseries.strokeOpacity = 1;
+topseries.strokeDashArray = "1,3";
+topseries.columns.template.width = 0.01;
+topseries.tooltip.pointerOrientation = "vertical";
+
+var topbullet = topseries.bullets.create(am4charts.CircleBullet);
+
+topchart.cursor = new am4charts.XYCursor();
+
+topchart.scrollbarX = new am4core.Scrollbar();
+//topchart.scrollbarY = new am4core.Scrollbar();
+// Enable export
+topchart.exporting.menu = new am4core.ExportMenu();
+topchart.exporting.menu.align = "left";
+
+//END TOP 20
+
+//Distribution
+/* Create chart instance */
+var radar = am4core.create("radar", am4charts.XYChart);
+radar.numberFormatter.numberFormat = "#a";
+radar.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+/* Create axes */
+var radarxAxis = radar.xAxes.push(new am4charts.ValueAxis());
+radarxAxis.renderer.maxLabelPosition = 0.99;
+radarxAxis.title.text = "ETH";
+
+var radaryAxis = radar.yAxes.push(new am4charts.ValueAxis());
+radaryAxis.renderer.labels.template.verticalCenter = "bottom";
+radaryAxis.renderer.labels.template.horizontalCenter = "right";
+radaryAxis.renderer.maxLabelPosition = 0.99;
+radaryAxis.renderer.labels.template.paddingBottom = 1;
+radaryAxis.renderer.labels.template.paddingRight = 3;
+radaryAxis.title.text = "Frequency (Number of Contributions)";
+
+radar.data = [
+{"investedeth":1,"frequency":122},
+{"investedeth":2,"frequency":27},
+{"investedeth":3,"frequency":22},
+{"investedeth":4,"frequency":14},
+{"investedeth":5,"frequency":25},
+{"investedeth":6,"frequency":3},
+{"investedeth":7,"frequency":12},
+{"investedeth":8,"frequency":3},
+{"investedeth":9,"frequency":4},
+{"investedeth":10,"frequency":25},
+{"investedeth":11,"frequency":1},
+{"investedeth":12,"frequency":2},
+{"investedeth":13,"frequency":1},
+{"investedeth":15,"frequency":4},
+{"investedeth":16,"frequency":1},
+{"investedeth":17,"frequency":3},
+{"investedeth":18,"frequency":2},
+{"investedeth":19,"frequency":2},
+{"investedeth":20,"frequency":16},
+{"investedeth":21,"frequency":2},
+{"investedeth":22,"frequency":1},
+{"investedeth":24,"frequency":1},
+{"investedeth":25,"frequency":5},
+{"investedeth":26,"frequency":1},
+{"investedeth":28,"frequency":1},
+{"investedeth":30,"frequency":3},
+{"investedeth":32,"frequency":2},
+{"investedeth":40,"frequency":2},
+{"investedeth":45,"frequency":1},
+{"investedeth":46,"frequency":1},
+{"investedeth":47,"frequency":1},
+{"investedeth":50,"frequency":8},
+{"investedeth":54,"frequency":1},
+{"investedeth":55,"frequency":5},
+{"investedeth":57,"frequency":1},
+{"investedeth":60,"frequency":1},
+{"investedeth":61,"frequency":1},
+{"investedeth":70,"frequency":1},
+{"investedeth":71,"frequency":1},
+{"investedeth":72,"frequency":1},
+{"investedeth":90,"frequency":1},
+{"investedeth":100,"frequency":9},
+{"investedeth":124,"frequency":1},
+{"investedeth":138,"frequency":1},
+{"investedeth":150,"frequency":3},
+{"investedeth":168,"frequency":1},
+{"investedeth":175,"frequency":1},
+{"investedeth":199,"frequency":1},
+{"investedeth":200,"frequency":5},
+{"investedeth":206,"frequency":1},
+{"investedeth":232,"frequency":1},
+{"investedeth":250,"frequency":1},
+{"investedeth":260,"frequency":1},
+{"investedeth":299,"frequency":1},
+{"investedeth":400,"frequency":1},
+{"investedeth":417,"frequency":1},
+{"investedeth":500,"frequency":3},
+{"investedeth":515,"frequency":1},
+{"investedeth":1000,"frequency":1},
+{"investedeth":1200,"frequency":1},
+{"investedeth":1500,"frequency":1},
+{"investedeth":2700,"frequency":1}]
+;
+
+// Create series
+var radarlineSeries = radar.series.push(new am4charts.LineSeries());
+radarlineSeries.dataFields.valueY = "frequency";
+radarlineSeries.dataFields.valueX = "investedeth";
+//radarlineSeries.strokeOpacity = 0;
+
+// Add a bullet
+var radarbullet = radarlineSeries.bullets.push(new am4charts.Bullet());
+/* Add cursor */
+radar.cursor = new am4charts.XYCursor();
+
+//scrollbars
+radar.scrollbarX = new am4core.Scrollbar();
+radar.scrollbarY = new am4core.Scrollbar();
+
+
+//Bar Chart Introducers vs Referrals
+var refs = am4core.create("refs", am4charts.XYChart);
+refs.numberFormatter.numberFormat = "#a";
+refs.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+// Add cursor
+refs.cursor = new am4charts.XYCursor();
+
+// Add data
+refs.data = [
+{"eth":"346.12901138328016","affiliates":"46","introducer":"0x9498dB340A3ecab7Bb0973ee36e95E58C8E58a41"},
+{"eth":"2335.425100030545","affiliates":"24","introducer":"0x81042f7F99a86D3981308E72feb36BD791C31920"},
+{"eth":"4498.862789530307","affiliates":"21","introducer":"0xD8dE1f6764E442b8763d313722E9eaEe3779707E"},
+{"eth":"105.28500110656023","affiliates":"18","introducer":"0x45EE0A0db0E775AeCBebB300cCfC6486690B3287"},
+{"eth":"53.625","affiliates":"4","introducer":"0xd8068f813c45C88CEBb02cBC0F91F95626Ec9a34"},
+{"eth":"1520.050000000745","affiliates":"3","introducer":"0xE552821eE85284249C71d4aBFc4437992Ed2FB93"},
+{"eth":"198","affiliates":"3","introducer":"0x8E7fCc7A17f00f0f5f85F2D5964A581D0813c8A6"},
+{"eth":"127.9000015258789","affiliates":"3","introducer":"0x55763D6dB54736084c1B8d010Aa1d99F0DC6d07C"},
+{"eth":"57.79000077396631","affiliates":"3","introducer":"0xB98df9F7CDC3a983081CeFA1cd94AED4E936F1a9"},
+{"eth":"8.836699545383453","affiliates":"2","introducer":"0x6b5e2758bDB9eD798ACBFd64104C1deAf09CD24b"},
+{"eth":"100","affiliates":"2","introducer":"0x9F4f9E15a4A963a9a3885979Cc64B326dCAa18A8"},
+{"eth":"31.679999828338623","affiliates":"2","introducer":"0x531C2607862dE00604f600cfF6Be9cb312467570"},
+{"eth":"25","affiliates":"2","introducer":"0x1080355C93A1B4c0Dd3c340Eed4f7E514c583077"},
+{"eth":"22","affiliates":"2","introducer":"0x0013AA2FB5EC916660b38f1D53D4fC9BF8eF8A84"},
+{"eth":"20","affiliates":"1","introducer":"0x520E74218a9Fd5563855F11D204810281A833e0f"},
+{"eth":"16.399999618530273","affiliates":"1","introducer":"0xD307fF28710b7A4587200c5Ba4c67648c1F24045"},
+{"eth":"6.96999979019165","affiliates":"1","introducer":"0xF22b286fdA7369255376742f360fFCEE4e1FBD42"},
+{"eth":"5.900000095367432","affiliates":"1","introducer":"0x380566185c87aB93CA4edD474Cf6998B5fc4153e"},
+{"eth":"5","affiliates":"1","introducer":"0x27c72e4BD23C910218d8f06C4a1742E06657c874"},
+{"eth":"4.199999809265137","affiliates":"1","introducer":"0xc78a748DcCBD806ae782EB3b8590ae7d162E5A90"},
+{"eth":"0.10000000149011612","affiliates":"1","introducer":"0xa5A6D551ab33c3920848844b3Fe3b27591DF8F10"}
+];
+
+// Create axes
+var categoryAxis = refs.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "introducer";
+categoryAxis.numberFormatter.numberFormat = "#";
+categoryAxis.renderer.inversed = true;
+categoryAxis.renderer.labels.template.disabled = true;
+categoryAxis.tooltip.disabled = true;
+//categoryAxis.title.text = "Introducer";
+var  valueAxis = refs.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis.title.text = "Affiliates";
+
+// Create series
+var refsseries = refs.series.push(new am4charts.ColumnSeries());
+refsseries.dataFields.valueX = "affiliates";
+refsseries.dataFields.categoryY = "introducer";
+refsseries.name = "Referrals";
+refsseries.columns.template.propertyFields.fill = "color";
+refsseries.columns.template.tooltipHTML = "<span style='font-size:14px'><b>{introducer}</b><br> {valueX} Affiliates</span>";
+
+//refs.scrollbarX = new am4core.Scrollbar();
+refs.scrollbarY = new am4core.Scrollbar();
+
+//Refs ETH
+//Bar Chart Introducers vs Referrals
+var refseth = am4core.create("refseth", am4charts.XYChart);
+refseth.numberFormatter.numberFormat = "#a";
+refseth.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+// Add cursor
+refseth.cursor = new am4charts.XYCursor();
+// Add data
+refseth.data = [
+{"eth":"4498.86","affiliates":"21","introducer":"0xD8dE1f6764E442b8763d313722E9eaEe3779707E"},
+{"eth":"2335.42","affiliates":"24","introducer":"0x81042f7F99a86D3981308E72feb36BD791C31920"},
+{"eth":"1520.05","affiliates":"3","introducer":"0xE552821eE85284249C71d4aBFc4437992Ed2FB93"},
+{"eth":"346.12","affiliates":"46","introducer":"0x9498dB340A3ecab7Bb0973ee36e95E58C8E58a41"},
+{"eth":"198","affiliates":"3","introducer":"0x8E7fCc7A17f00f0f5f85F2D5964A581D0813c8A6"},
+{"eth":"127.90","affiliates":"3","introducer":"0x55763D6dB54736084c1B8d010Aa1d99F0DC6d07C"},
+{"eth":"105.28","affiliates":"18","introducer":"0x45EE0A0db0E775AeCBebB300cCfC6486690B3287"},
+{"eth":"100","affiliates":"2","introducer":"0x9F4f9E15a4A963a9a3885979Cc64B326dCAa18A8"},
+{"eth":"53.625","affiliates":"4","introducer":"0xd8068f813c45C88CEBb02cBC0F91F95626Ec9a34"},
+{"eth":"57.79","affiliates":"3","introducer":"0xB98df9F7CDC3a983081CeFA1cd94AED4E936F1a9"},
+{"eth":"31.67","affiliates":"2","introducer":"0x531C2607862dE00604f600cfF6Be9cb312467570"},
+{"eth":"25","affiliates":"2","introducer":"0x1080355C93A1B4c0Dd3c340Eed4f7E514c583077"},
+{"eth":"22","affiliates":"2","introducer":"0x0013AA2FB5EC916660b38f1D53D4fC9BF8eF8A84"},
+{"eth":"20","affiliates":"1","introducer":"0x520E74218a9Fd5563855F11D204810281A833e0f"},
+{"eth":"16.40","affiliates":"1","introducer":"0xD307fF28710b7A4587200c5Ba4c67648c1F24045"},
+{"eth":"8.84","affiliates":"2","introducer":"0x6b5e2758bDB9eD798ACBFd64104C1deAf09CD24b"},
+{"eth":"6.97","affiliates":"1","introducer":"0xF22b286fdA7369255376742f360fFCEE4e1FBD42"},
+{"eth":"5.90","affiliates":"1","introducer":"0x380566185c87aB93CA4edD474Cf6998B5fc4153e"},
+{"eth":"5","affiliates":"1","introducer":"0x27c72e4BD23C910218d8f06C4a1742E06657c874"},
+{"eth":"4.20","affiliates":"1","introducer":"0xc78a748DcCBD806ae782EB3b8590ae7d162E5A90"},
+{"eth":"0.10","affiliates":"1","introducer":"0xa5A6D551ab33c3920848844b3Fe3b27591DF8F10"}
+]
+;
+
+// Create axes
+var categoryAxis1 = refseth.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis1.dataFields.category = "introducer";
+categoryAxis1.numberFormatter.numberFormat = "#";
+categoryAxis1.renderer.inversed = true;
+categoryAxis1.renderer.labels.template.disabled = true;
+//categoryAxis1.title.text = "Introducer";
+var  valueAxis1 = refseth.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis1.title.text = "ETH";
+
+// Create series
+var refseseries = refseth.series.push(new am4charts.ColumnSeries());
+refseseries.dataFields.valueX = "eth";
+refseseries.dataFields.categoryY = "introducer";
+refseseries.name = "Referrals";
+refseseries.columns.template.propertyFields.fill = "color";
+refseseries.columns.template.tooltipHTML = "<span style='font-size:14px'><b>{valueX} ETH</b></span>";
+
+//refseth.scrollbarX = new am4core.Scrollbar();
+refseth.scrollbarY = new am4core.Scrollbar();
+
+//Pie Chart Distribution
+
+var chart = am4core.create("durationpie", am4charts.PieChart3D);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+  {
+    lock: "30 Days",
+    eth: 4173.65
+  },
+  {
+    lock: "100 Days",
+    eth: 8488.69
+  },
+  {
+    lock: "300 Days",
+    eth: 2973.99
+  },
+  {
+    lock: "1000 Days",
+    eth: 1146.88
+  }
+];
+
+var series = chart.series.push(new am4charts.PieSeries3D());
+series.dataFields.value = "eth";
+series.dataFields.category = "lock";
+//series.ticks.template.disabled = true;
+series.labels.template.text = "{category}";
+series.slices.template.tooltipHTML = "{category}<br><span style='font-size:14px'><b>{value.value} ETH</b> ({value.percent}%)</span>";
+
+}); // end am4core.ready()
+</script>
+
+</head>
+
+<body id="page-top" class="sidebar-toggled">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <!--<i class="fas fa-laugh-wink"></i>-->
+          <img src="img/PlasmSurf.png" width="100%">
+        </div>
+        <!--<div class="sidebar-brand-text mx-3"><sup>DeFI</sup></div>-->
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <!--<li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>-->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Lockdrop
+      </div>
+
+
+            <!-- Nav Item - Pools Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo1">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Lockdrop 1</span>
+        </a>
+        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <h6 class="collapse-header"><!--Select Pool:--></h6>
+            <a class="collapse-item" href="#">Stats</a>
+            <a class="collapse-item" href="browse.html">Browse</a>
+          </div>
+        </div>
+      </li>
+
+                  <!-- Nav Item - Pools Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo3" aria-expanded="true" aria-controls="collapseTwo3">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Lockdrop 2</span>
+        </a>
+        <div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <h6 class="collapse-header"><!--Select Pool:--></h6>
+            <a class="collapse-item" href="lockdrop-2.html">Stats</a>
+            <a class="collapse-item" href="browse-2.html">Browse</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Resources
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Official Links</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <!--<h6 class="collapse-header">Login Screens:</h6>-->
+            <a class="collapse-item" href="https://www.plasmnet.io/" target="_blank">Website</a>
+            <a class="collapse-item" href="https://docs.plasmnet.io/" target="_blank">Docs</a>
+            <a class="collapse-item" href="https://medium.com/stake-technologies" target="_blank">Blog</a>
+            <a class="collapse-item" href="https://github.com/staketechnologies/Plasm" target="_blank">GitHub</a>
+           
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Social</h6>
+            <a class="collapse-item" href="https://discordapp.com/invite/Dnfn5eT" target="_blank">Discord</a>
+            <a class="collapse-item" href="https://t.me/PlasmOfficial" target="_blank">Telegram</a>
+            <a class="collapse-item" href="https://twitter.com/Plasm_Network" target="_blank">Twitter</a>
+          </div>
+        </div>
+      </li>
+
+
+      <!-- Nav Item - Tables 
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li>-->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search 
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>-->
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Alerts 
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>-->
+                <!-- Counter - Alerts 
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>-->
+              <!-- Dropdown - Alerts 
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>-->
+
+
+            <!--<div class="topbar-divider d-none d-sm-block"></div>-->
+
+            <!-- Nav Item - User Information 
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">0xf751 ... 577c</span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+              </a>-->
+              <!-- Dropdown - User Information 
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="https://twitter.com/intent/tweet?screen_name=98farhan94&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @98farhan94</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </li>-->
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-dark">Overview</h1>
+            <!--<<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plug fa-sm text-white-50"></i> &nbsp;Connect Wallet</a>-->
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Participants</div>
+                      <div class="h5 mb-0 font-weight-bold text-primary" id="price">262</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Locks</div>
+                      <div class="h5 mb-0 font-weight-bold text-success" id="volume">368</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-user-lock fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">ETH Contributed</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-info" id="circulating">16,783.21</div>
+                        </div>
+                        <div class="col">
+                        <!--  <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fab fa-ethereum fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">PLM Distributed</div>
+                      <div class="h5 mb-0 font-weight-bold text-warning" id="marketcap">424,688,634</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-coins fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+              <div class="card bg-light shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-dark">Total ETH Locked</h6>
+                  <!--<div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>-->
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div id="controls"></div>
+                    <div id="mchart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Lock Duration</h6>
+                </div>
+                <div class="card-body">
+                  <div id="durationpie"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Locks Over Time</h6>
+                </div>
+                <div class="card-body">
+                    <div id="wchart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Content Row -->
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Top 20 Lockers</h6>
+                </div>
+                <div class="card-body">
+                  <div id="top20"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Distribution</h6>
+                </div>
+                <div class="card-body">
+                    <div id="radar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Content Row -->
+            <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h2 class="h3 mb-0 text-dark">Introducers</h2>
+        <!--<<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plug fa-sm text-white-50"></i> &nbsp;Connect Wallet</a>-->
+      </div>
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Number of Affiliates</h6>
+                </div>
+                <div class="card-body">
+                  <div id="refs"></div>
+                </div>
+              </div>
+        </div>
+
+               <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-dark">Amount of ETH Referred</h6>
+                </div>
+                <div class="card-body">
+                  <div id="refseth"></div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-light">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 2020 DeFi.SURF</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <!--<script src="js/web3.min.js"></script>-->
+
+  <!-- Page level plugins -->
+  <!--  <script src="vendor/chart.js/Chart.min.js"></script>-->
+
+  <!-- Page level custom scripts -->
+  <script>
+    //http://pushservice.curve.fi/pools
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4795921-11"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-4795921-11');
+</script>
+
+
+</body>
+
+</html>

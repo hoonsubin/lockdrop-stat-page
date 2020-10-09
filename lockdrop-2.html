@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Plasm Network | DeFi.SURF</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<!--<script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>-->
+<script src="https://cdn.amcharts.com/lib/4/plugins/rangeSelector.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<!-- Chart code -->
+<style>
+#durationpie {
+  width: 100%;
+  height: 300px;
+}
+
+body {
+  font-family: 'Montserrat';
+}
+
+#refs {
+  width: 100%;
+  height: 600px;
+}
+
+#refseth {
+  width: 100%;
+  height: 600px;
+}
+
+#top20 {
+  width: 100%;
+  height: 400px;
+}
+
+#radar {
+  width: 100%;
+  height: 400px;
+}
+
+#mchart {
+  width: 100%;
+  height: 400px;
+}
+
+#wchart {
+  width: 100%;
+  height: 300px;
+}
+</style>
+
+<script>
+
+WebFont.load({
+google: {
+  families: ["Montserrat:500","Montserrat:700"]
+},
+active: function() {
+  console.log("All set!");
+}
+});
+
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+//am4core.useTheme(am4themes_dark);
+// Themes end
+
+//Master CHart TVL
+// Create chart instance
+var mchart = am4core.create("mchart", am4charts.XYChart);
+mchart.numberFormatter.numberFormat = "#a";
+mchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+//
+
+// Increase contrast by taking evey second color
+mchart.colors.step = 2;
+
+// Add data
+mchart.data = [
+{"Day":"2020-08-31","ETH":"24855.93968599965","Deposits":"1417","cumulative_deposits":"1417","cumulative_eth":"24855.93968599965"},
+{"Day":"2020-09-01","ETH":"10675.344898231328","Deposits":"428","cumulative_deposits":"1845","cumulative_eth":"35531.284584230976"},
+{"Day":"2020-09-02","ETH":"2223.1118295155466","Deposits":"167","cumulative_deposits":"2012","cumulative_eth":"37754.39641374652"},
+{"Day":"2020-09-03","ETH":"1170.4435310205445","Deposits":"187","cumulative_deposits":"2199","cumulative_eth":"38924.83994476707"},
+{"Day":"2020-09-04","ETH":"719.4953773356974","Deposits":"121","cumulative_deposits":"2320","cumulative_eth":"39644.335322102765"},
+{"Day":"2020-09-05","ETH":"308.8995703998953","Deposits":"98","cumulative_deposits":"2418","cumulative_eth":"39953.23489250266"},
+{"Day":"2020-09-06","ETH":"862.6878789123148","Deposits":"105","cumulative_deposits":"2523","cumulative_eth":"40815.922771414975"},
+{"Day":"2020-09-07","ETH":"1856.0847369395196","Deposits":"203","cumulative_deposits":"2726","cumulative_eth":"42672.007508354494"},
+{"Day":"2020-09-08","ETH":"2405.100316984928","Deposits":"219","cumulative_deposits":"2945","cumulative_eth":"45077.10782533942"},
+{"Day":"2020-09-09","ETH":"8252.799076552852","Deposits":"143","cumulative_deposits":"3088","cumulative_eth":"53329.906901892275"},
+{"Day":"2020-09-10","ETH":"3256.849343530368","Deposits":"137","cumulative_deposits":"3225","cumulative_eth":"56586.75624542264"},
+{"Day":"2020-09-11","ETH":"2349.42851305753","Deposits":"75","cumulative_deposits":"3300","cumulative_eth":"58936.18475848017"},
+{"Day":"2020-09-12","ETH":"1362.4095014501363","Deposits":"117","cumulative_deposits":"3417","cumulative_eth":"60298.59425993031"},
+{"Day":"2020-09-13","ETH":"3011.0869183968753","Deposits":"148","cumulative_deposits":"3565","cumulative_eth":"63309.681178327184"},
+{"Day":"2020-09-14","ETH":"3909.245863452088","Deposits":"113","cumulative_deposits":"3678","cumulative_eth":"67218.92704177927"},
+{"Day":"2020-09-15","ETH":"657.1130426954478","Deposits":"116","cumulative_deposits":"3794","cumulative_eth":"67876.04008447472"},
+{"Day":"2020-09-16","ETH":"3723.0959017369896","Deposits":"159","cumulative_deposits":"3953","cumulative_eth":"71599.13598621171"},
+{"Day":"2020-09-17","ETH":"661.6440332233906","Deposits":"110","cumulative_deposits":"4063","cumulative_eth":"72260.7800194351"},
+{"Day":"2020-09-18","ETH":"795.4121912671253","Deposits":"249","cumulative_deposits":"4312","cumulative_eth":"73056.19221070223"},
+{"Day":"2020-09-19","ETH":"1556.5494402721524","Deposits":"261","cumulative_deposits":"4573","cumulative_eth":"74612.74165097438"},
+{"Day":"2020-09-20","ETH":"4060.0201386455446","Deposits":"349","cumulative_deposits":"4922","cumulative_eth":"78672.76178961992"},
+{"Day":"2020-09-21","ETH":"1284.8694150205702","Deposits":"290","cumulative_deposits":"5212","cumulative_eth":"79957.6312046405"},
+{"Day":"2020-09-22","ETH":"2553.633871749509","Deposits":"259","cumulative_deposits":"5471","cumulative_eth":"82511.26507639"},
+{"Day":"2020-09-23","ETH":"1247.3049076597672","Deposits":"224","cumulative_deposits":"5695","cumulative_eth":"83758.56998404977"},
+{"Day":"2020-09-24","ETH":"4477.901461726055","Deposits":"311","cumulative_deposits":"6006","cumulative_eth":"88236.47144577582"},
+{"Day":"2020-09-25","ETH":"1851.367113813758","Deposits":"296","cumulative_deposits":"6302","cumulative_eth":"90087.83855958958"},
+{"Day":"2020-09-26","ETH":"3461.576066745445","Deposits":"341","cumulative_deposits":"6643","cumulative_eth":"93549.41462633503"},
+{"Day":"2020-09-27","ETH":"17112.99622613145","Deposits":"430","cumulative_deposits":"7073","cumulative_eth":"110662.41085246648"},
+{"Day":"2020-09-28","ETH":"8286.223290579743","Deposits":"670","cumulative_deposits":"7743","cumulative_eth":"118948.63414304622"},
+{"Day":"2020-09-29","ETH":"12560.06129570806","Deposits":"1031","cumulative_deposits":"8774","cumulative_eth":"131508.69543875428"},
+{"Day":"2020-09-30","ETH":"5744.301708608866","Deposits":"551","cumulative_deposits":"9325","cumulative_eth":"137252.99714736314"}
+];
+
+// Create axes
+var dateAxis = mchart.xAxes.push(new am4charts.DateAxis());
+dateAxis.renderer.minGridDistance = 50;
+dateAxis.renderer.grid.template.location = 0;
+dateAxis.renderer.ticks.template.length = 8;
+dateAxis.renderer.ticks.template.strokeOpacity = 0.1;
+dateAxis.renderer.grid.template.disabled = true;
+dateAxis.renderer.ticks.template.disabled = false;
+dateAxis.renderer.ticks.template.strokeOpacity = 0.2;
+dateAxis.renderer.minLabelPosition = 0.01;
+dateAxis.renderer.maxLabelPosition = 0.99;
+dateAxis.keepSelection = true;
+
+dateAxis.groupData = true;
+dateAxis.minZoomCount = 5;
+
+// Create series
+function createAxisAndSeries(field, name, opposite, bullet) {
+  var valueAxis = mchart.yAxes.push(new am4charts.ValueAxis());
+  if(mchart.yAxes.indexOf(valueAxis) != 0){
+    valueAxis.syncWithAxis = mchart.yAxes.getIndex(0);
+  }
+  
+  var mseries = mchart.series.push(new am4charts.LineSeries());
+  mseries.dataFields.valueY = field;
+  mseries.dataFields.dateX = "Day";
+  mseries.strokeWidth = 2;
+  mseries.yAxis = valueAxis;
+  mseries.name = name;
+  mseries.tooltipText = "{name}: [bold]{valueY}[/]";
+  mseries.tensionX = 0.8;
+  mseries.showOnInit = true;
+ // mseries.yAxis.title.text = "ETH";
+  
+  var interfaceColors = new am4core.InterfaceColorSet();
+  
+  switch(bullet) {
+    case "triangle":
+      var bullet = mseries.bullets.push(new am4charts.Bullet());
+      bullet.width = 12;
+      bullet.height = 12;
+      bullet.horizontalCenter = "middle";
+      bullet.verticalCenter = "middle";
+      
+      var triangle = bullet.createChild(am4core.Triangle);
+      triangle.stroke = interfaceColors.getFor("background");
+      triangle.strokeWidth = 2;
+      triangle.direction = "top";
+      triangle.width = 12;
+      triangle.height = 12;
+      break;
+    case "rectangle":
+      var bullet = mseries.bullets.push(new am4charts.Bullet());
+      bullet.width = 10;
+      bullet.height = 10;
+      bullet.horizontalCenter = "middle";
+      bullet.verticalCenter = "middle";
+      
+      var rectangle = bullet.createChild(am4core.Rectangle);
+      rectangle.stroke = interfaceColors.getFor("background");
+      rectangle.strokeWidth = 2;
+      rectangle.width = 10;
+      rectangle.height = 10;
+      break;
+    default:
+      var bullet = mseries.bullets.push(new am4charts.CircleBullet());
+      bullet.circle.stroke = interfaceColors.getFor("background");
+      bullet.circle.strokeWidth = 2;
+      break;
+  }
+  
+  valueAxis.renderer.line.strokeOpacity = 1;
+  valueAxis.renderer.line.strokeWidth = 2;
+  valueAxis.renderer.line.stroke = mseries.stroke;
+  valueAxis.renderer.labels.template.fill = mseries.stroke;
+  valueAxis.renderer.opposite = opposite;
+  //valueAxis.title.text = "ETH";
+}
+
+createAxisAndSeries("Deposits", "Locks", false, "circle");
+createAxisAndSeries("ETH", "ETH", false, "circle");
+createAxisAndSeries("cumulative_deposits", "Total Locks", false, "rectangle");
+createAxisAndSeries("cumulative_eth", "Total ETH", false, "rectangle");
+
+
+
+// Add legend
+mchart.legend = new am4charts.Legend();
+
+// Add cursor
+mchart.cursor = new am4charts.XYCursor();
+mchart.cursor.xAxis = dateAxis;
+
+
+//Add Scrollbar
+mchart.scrollbarX = new am4core.Scrollbar();
+
+//END Master Chart TVL
+
+//WEEKLY
+var wchart = am4core.create("wchart", am4charts.XYChart);
+
+wchart.data = [{
+  "name": "Week 1",
+  "startTime": 0,
+  "endTime": 40815.92,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 2",
+  "startTime": 40815.92,
+  "endTime": 63309.68,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 3",
+  "startTime": 63309.68,
+  "endTime": 78672.76,
+  "color": wchart.colors.next()
+}, {
+  "name": "Week 4",
+  "startTime": 78672.76,
+  "endTime": 110662.41,
+  "color": wchart.colors.next()
+}, {
+  "name": "Last 2 Days",
+  "startTime": 110662.41,
+  "endTime": 131508.69,
+  "color": wchart.colors.next()
+}];
+
+wchart.numberFormatter.numberFormat = "#a";
+wchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+
+var categoryAxis = wchart.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "name";
+categoryAxis.renderer.inversed = true;
+categoryAxis.renderer.grid.template.location = 0;
+
+var valueAxis = wchart.xAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.minGridDistance = 50;
+valueAxis.title.text = "ETH";
+
+var columnSeries = wchart.series.push(new am4charts.ColumnSeries());
+columnSeries.dataFields.categoryY = "name";
+columnSeries.dataFields.valueX = "endTime";
+columnSeries.dataFields.openValueX = "startTime";
+columnSeries.calculatePercent = true;
+columnSeries.columns.template.tooltipText = "[bold]{categoryY}[/]\n{valueX.percent} %";
+
+var columnTemplate = columnSeries.columns.template;
+columnTemplate.strokeOpacity = 0;
+columnTemplate.propertyFields.fill = "color";
+columnTemplate.height = am4core.percent(100);
+
+//TOP 20
+var topchart = am4core.create("top20", am4charts.XYChart);
+topchart.numberFormatter.numberFormat = "#a";
+topchart.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+
+topchart.data = [
+{"Address":"0x50b42514389F25E1f471C8F03f6f5954df0204b0","Locked":"10000"},
+{"Address":"0x9437806725631c0B209b6c0b5FD4198A77A57073","Locked":"4600"},
+{"Address":"0xdbbe53216A2F49E32156dA1E3fce43ff7609B703","Locked":"4000"},
+{"Address":"0xbDCEe87119265FC0ec27a3113EFC3fBBB90D4D7b","Locked":"3385"},
+{"Address":"0xcBF111366e51CA8E90180D0EE2C7FED9D2BD62dC","Locked":"2030"},
+{"Address":"0x585848e79d8307Ae47f3371717d87Ba99089F802","Locked":"1909"},
+{"Address":"0xEA8EcF241579306aAB5658a68b03eFdD3AE5F3B4","Locked":"1350"},
+{"Address":"0x5f17B674a167a2b137af92a007A94B54Aa0F6EEC","Locked":"1000"},
+{"Address":"0x91715128a71c9C734CDC20E5EdEEeA02E72e428E","Locked":"1000"},
+{"Address":"0x274d9E726844AB52E351e8F1272e7fc3f58B7E5F","Locked":"1000"},
+{"Address":"0xC4Dc3a8390Dc0E98F27C4A46dfC9FAff387501f1","Locked":"1000"},
+{"Address":"0xC8E99360D5b672D66610B0db0807611fe954CcF9","Locked":"800"},
+{"Address":"0x4a470942dd7A44c6574666F8BDa47ce33c19A601","Locked":"740"},
+{"Address":"0xa160b262A5bCACad3FFD11F051416371d3F9e82C","Locked":"757"},
+{"Address":"0x122D83495e1449bFFf912f3be00A9E415c379173","Locked":"758"},
+{"Address":"0x464D876a94De8CBC957a81b15A5dA34f2b66107a","Locked":"660"},
+{"Address":"0x52709136A6487F0D54b2F54170F13774E4a75fE5","Locked":"564"},
+{"Address":"0x318c812731d0c35a1bE2736A34CCF99E563ECF66","Locked":"500"},
+{"Address":"0x22b2bF135cFF621A5A1Cfb8bcf77EbDa36e0598d","Locked":"500"},
+{"Address":"0xCcb12611039c7CD321c0F23043c841F1d97287A5","Locked":"500"}
+];
+
+var topcategoryAxis = topchart.xAxes.push(new am4charts.CategoryAxis());
+topcategoryAxis.renderer.grid.template.location = 0;
+topcategoryAxis.dataFields.category = "Address";
+topcategoryAxis.renderer.minGridDistance = 10;
+topcategoryAxis.renderer.grid.template.location = 0.5;
+topcategoryAxis.renderer.grid.template.strokeDasharray = "1,3";
+topcategoryAxis.renderer.labels.template.rotation = -90;
+topcategoryAxis.renderer.labels.template.horizontalCenter = "left";
+topcategoryAxis.renderer.labels.template.location = 0.5;
+topcategoryAxis.renderer.labels.template.disabled = true;
+
+topcategoryAxis.renderer.labels.template.adapter.add("dx", function(dx, target) {
+    return -target.maxRight / 2;
+})
+
+var topvalueAxis = topchart.yAxes.push(new am4charts.ValueAxis());
+topvalueAxis.tooltip.disabled = true;
+topvalueAxis.renderer.ticks.template.disabled = true;
+topvalueAxis.renderer.axisFills.template.disabled = true;
+topvalueAxis.title.text = "ETH";
+
+var topseries = topchart.series.push(new am4charts.ColumnSeries());
+topseries.dataFields.categoryX = "Address";
+topseries.dataFields.valueY = "Locked";
+topseries.tooltipText = "{valueY.value} ETH";
+topseries.sequencedInterpolation = true;
+topseries.fillOpacity = 0;
+topseries.strokeOpacity = 1;
+topseries.strokeDashArray = "1,3";
+topseries.columns.template.width = 0.01;
+topseries.tooltip.pointerOrientation = "vertical";
+
+var topbullet = topseries.bullets.create(am4charts.CircleBullet);
+
+topchart.cursor = new am4charts.XYCursor();
+
+topchart.scrollbarX = new am4core.Scrollbar();
+//topchart.scrollbarY = new am4core.Scrollbar();
+// Enable export
+topchart.exporting.menu = new am4core.ExportMenu();
+topchart.exporting.menu.align = "left";
+
+//END TOP 20
+
+//Distribution
+/* Create chart instance */
+var radar = am4core.create("radar", am4charts.XYChart);
+radar.numberFormatter.numberFormat = "#a";
+radar.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+/* Create axes */
+var radarxAxis = radar.xAxes.push(new am4charts.ValueAxis());
+radarxAxis.renderer.maxLabelPosition = 0.99;
+radarxAxis.title.text = "ETH";
+
+var radaryAxis = radar.yAxes.push(new am4charts.ValueAxis());
+radaryAxis.renderer.labels.template.verticalCenter = "bottom";
+radaryAxis.renderer.labels.template.horizontalCenter = "right";
+radaryAxis.renderer.maxLabelPosition = 0.99;
+radaryAxis.renderer.labels.template.paddingBottom = 1;
+radaryAxis.renderer.labels.template.paddingRight = 3;
+radaryAxis.title.text = "Frequency (Number of Contributions)";
+
+radar.data = [
+{"investedeth":"1","frequency":"4138"},
+{"investedeth":"2","frequency":"1415"},
+{"investedeth":"3","frequency":"778"},
+{"investedeth":"4","frequency":"402"},
+{"investedeth":"5","frequency":"534"},
+{"investedeth":"6","frequency":"179"},
+{"investedeth":"7","frequency":"131"},
+{"investedeth":"8","frequency":"108"},
+{"investedeth":"9","frequency":"73"},
+{"investedeth":"10","frequency":"400"},
+{"investedeth":"11","frequency":"57"},
+{"investedeth":"12","frequency":"29"},
+{"investedeth":"13","frequency":"31"},
+{"investedeth":"14","frequency":"29"},
+{"investedeth":"15","frequency":"91"},
+{"investedeth":"16","frequency":"23"},
+{"investedeth":"17","frequency":"17"},
+{"investedeth":"18","frequency":"19"},
+{"investedeth":"19","frequency":"8"},
+{"investedeth":"20","frequency":"129"},
+{"investedeth":"21","frequency":"16"},
+{"investedeth":"22","frequency":"9"},
+{"investedeth":"23","frequency":"10"},
+{"investedeth":"24","frequency":"11"},
+{"investedeth":"25","frequency":"36"},
+{"investedeth":"26","frequency":"15"},
+{"investedeth":"27","frequency":"10"},
+{"investedeth":"28","frequency":"8"},
+{"investedeth":"29","frequency":"8"},
+{"investedeth":"30","frequency":"62"},
+{"investedeth":"31","frequency":"4"},
+{"investedeth":"32","frequency":"15"},
+{"investedeth":"33","frequency":"6"},
+{"investedeth":"34","frequency":"13"},
+{"investedeth":"35","frequency":"16"},
+{"investedeth":"36","frequency":"3"},
+{"investedeth":"37","frequency":"4"},
+{"investedeth":"38","frequency":"4"},
+{"investedeth":"39","frequency":"5"},
+{"investedeth":"40","frequency":"34"},
+{"investedeth":"41","frequency":"5"},
+{"investedeth":"42","frequency":"1"},
+{"investedeth":"43","frequency":"2"},
+{"investedeth":"44","frequency":"6"},
+{"investedeth":"45","frequency":"6"},
+{"investedeth":"47","frequency":"2"},
+{"investedeth":"49","frequency":"4"},
+{"investedeth":"50","frequency":"83"},
+{"investedeth":"51","frequency":"3"},
+{"investedeth":"52","frequency":"3"},
+{"investedeth":"53","frequency":"3"},
+{"investedeth":"55","frequency":"5"},
+{"investedeth":"56","frequency":"4"},
+{"investedeth":"57","frequency":"1"},
+{"investedeth":"58","frequency":"1"},
+{"investedeth":"59","frequency":"4"},
+{"investedeth":"60","frequency":"13"},
+{"investedeth":"61","frequency":"1"},
+{"investedeth":"62","frequency":"4"},
+{"investedeth":"64","frequency":"3"},
+{"investedeth":"65","frequency":"6"},
+{"investedeth":"66","frequency":"1"},
+{"investedeth":"67","frequency":"2"},
+{"investedeth":"68","frequency":"5"},
+{"investedeth":"69","frequency":"3"},
+{"investedeth":"70","frequency":"4"},
+{"investedeth":"71","frequency":"2"},
+{"investedeth":"72","frequency":"3"},
+{"investedeth":"73","frequency":"2"},
+{"investedeth":"74","frequency":"1"},
+{"investedeth":"75","frequency":"3"},
+{"investedeth":"76","frequency":"1"},
+{"investedeth":"77","frequency":"1"},
+{"investedeth":"78","frequency":"1"},
+{"investedeth":"80","frequency":"6"},
+{"investedeth":"82","frequency":"1"},
+{"investedeth":"83","frequency":"1"},
+{"investedeth":"84","frequency":"2"},
+{"investedeth":"85","frequency":"2"},
+{"investedeth":"88","frequency":"2"},
+{"investedeth":"89","frequency":"1"},
+{"investedeth":"90","frequency":"3"},
+{"investedeth":"93","frequency":"1"},
+{"investedeth":"95","frequency":"2"},
+{"investedeth":"97","frequency":"4"},
+{"investedeth":"98","frequency":"2"},
+{"investedeth":"99","frequency":"6"},
+{"investedeth":"100","frequency":"64"},
+{"investedeth":"101","frequency":"1"},
+{"investedeth":"105","frequency":"2"},
+{"investedeth":"108","frequency":"1"},
+{"investedeth":"109","frequency":"1"},
+{"investedeth":"110","frequency":"1"},
+{"investedeth":"113","frequency":"1"},
+{"investedeth":"116","frequency":"1"},
+{"investedeth":"120","frequency":"2"},
+{"investedeth":"122","frequency":"1"},
+{"investedeth":"126","frequency":"1"},
+{"investedeth":"129","frequency":"1"},
+{"investedeth":"135","frequency":"1"},
+{"investedeth":"138","frequency":"1"},
+{"investedeth":"140","frequency":"2"},
+{"investedeth":"141","frequency":"2"},
+{"investedeth":"142","frequency":"2"},
+{"investedeth":"150","frequency":"8"},
+{"investedeth":"151","frequency":"1"},
+{"investedeth":"152","frequency":"1"},
+{"investedeth":"159","frequency":"1"},
+{"investedeth":"160","frequency":"1"},
+{"investedeth":"163","frequency":"2"},
+{"investedeth":"170","frequency":"2"},
+{"investedeth":"175","frequency":"1"},
+{"investedeth":"185","frequency":"1"},
+{"investedeth":"190","frequency":"1"},
+{"investedeth":"196","frequency":"1"},
+{"investedeth":"199","frequency":"1"},
+{"investedeth":"200","frequency":"19"},
+{"investedeth":"206","frequency":"1"},
+{"investedeth":"210","frequency":"1"},
+{"investedeth":"221","frequency":"1"},
+{"investedeth":"225","frequency":"1"},
+{"investedeth":"230","frequency":"1"},
+{"investedeth":"239","frequency":"1"},
+{"investedeth":"244","frequency":"1"},
+{"investedeth":"250","frequency":"2"},
+{"investedeth":"255","frequency":"1"},
+{"investedeth":"269","frequency":"1"},
+{"investedeth":"270","frequency":"2"},
+{"investedeth":"290","frequency":"1"},
+{"investedeth":"298","frequency":"1"},
+{"investedeth":"299","frequency":"1"},
+{"investedeth":"300","frequency":"14"},
+{"investedeth":"301","frequency":"1"},
+{"investedeth":"308","frequency":"1"},
+{"investedeth":"309","frequency":"1"},
+{"investedeth":"314","frequency":"1"},
+{"investedeth":"317","frequency":"1"},
+{"investedeth":"318","frequency":"1"},
+{"investedeth":"347","frequency":"1"},
+{"investedeth":"350","frequency":"2"},
+{"investedeth":"355","frequency":"1"},
+{"investedeth":"370","frequency":"1"},
+{"investedeth":"375","frequency":"1"},
+{"investedeth":"400","frequency":"5"},
+{"investedeth":"430","frequency":"1"},
+{"investedeth":"494","frequency":"1"},
+{"investedeth":"500","frequency":"18"},
+{"investedeth":"527","frequency":"1"},
+{"investedeth":"550","frequency":"1"},
+{"investedeth":"564","frequency":"1"},
+{"investedeth":"595","frequency":"1"},
+{"investedeth":"600","frequency":"1"},
+{"investedeth":"650","frequency":"1"},
+{"investedeth":"699","frequency":"1"},
+{"investedeth":"705","frequency":"1"},
+{"investedeth":"740","frequency":"1"},
+{"investedeth":"791","frequency":"1"},
+{"investedeth":"830","frequency":"1"},
+{"investedeth":"963","frequency":"1"},
+{"investedeth":"1000","frequency":"7"},
+{"investedeth":"1200","frequency":"2"},
+{"investedeth":"1235","frequency":"1"},
+{"investedeth":"1350","frequency":"1"},
+{"investedeth":"1875","frequency":"1"},
+{"investedeth":"1909","frequency":"1"},
+{"investedeth":"2225","frequency":"1"},
+{"investedeth":"3000","frequency":"2"},
+{"investedeth":"3385","frequency":"1"},
+{"investedeth":"4000","frequency":"1"},
+{"investedeth":"10000","frequency":"1"}
+];
+
+// Create series
+var radarlineSeries = radar.series.push(new am4charts.LineSeries());
+radarlineSeries.dataFields.valueY = "frequency";
+radarlineSeries.dataFields.valueX = "investedeth";
+//radarlineSeries.strokeOpacity = 0;
+
+// Add a bullet
+var radarbullet = radarlineSeries.bullets.push(new am4charts.Bullet());
+/* Add cursor */
+radar.cursor = new am4charts.XYCursor();
+
+//scrollbars
+radar.scrollbarX = new am4core.Scrollbar();
+radar.scrollbarY = new am4core.Scrollbar();
+
+
+//Bar Chart Introducers vs Referrals
+var refs = am4core.create("refs", am4charts.XYChart);
+refs.numberFormatter.numberFormat = "#a";
+refs.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+// Add cursor
+refs.cursor = new am4charts.XYCursor();
+
+// Add data
+refs.data = [
+{"eth":"31195.33891414106","affiliates":"1577","introducer":"0x2d165E5191EF0674dA2637b421A765BDb1F8d346"},
+{"eth":"3909.390141995391","affiliates":"749","introducer":"0xF5d7D97B33C4090a8CAce5F7C5a1CC54C5740930"},
+{"eth":"10585.824927894399","affiliates":"373","introducer":"0x6C7e7fbFa69f4B5A5Ade1C27BC74fa4290a3b8A3"},
+{"eth":"3163.729643834755","affiliates":"275","introducer":"0xea8dd9381571D618119912AF553CE81c3c0dFF12"},
+{"eth":"1097.2310001403093","affiliates":"186","introducer":"0xA451FD5Fcc0D389e0C27FF22845c0e17153f7Dc8"},
+{"eth":"869.280000269413","affiliates":"142","introducer":"0x9498dB340A3ecab7Bb0973ee36e95E58C8E58a41"},
+{"eth":"1113.0540985632688","affiliates":"111","introducer":"0x29C176BC50433D65113A2e6776b595a3DE04F92f"},
+{"eth":"3876.8550028000027","affiliates":"93","introducer":"0x2411605A576fe058483382C1db691318056eBaaD"},
+{"eth":"626.7750002145767","affiliates":"48","introducer":"0x3937B5F83f8e3DB413bD202bAf4da5A64879690F"},
+{"eth":"1158.2150004524738","affiliates":"40","introducer":"0x81042f7F99a86D3981308E72feb36BD791C31920"},
+{"eth":"553.0000000149012","affiliates":"16","introducer":"0x01734005354d569716291cD1CFbc67f3f56a0b6F"},
+{"eth":"985.9500000476837","affiliates":"8","introducer":"0x23C6f263AdFb998F16a3d95f9C0D4D2024003156"},
+{"eth":"64.48999996483326","affiliates":"4","introducer":"0xd8068f813c45C88CEBb02cBC0F91F95626Ec9a34"},
+{"eth":"10.100000001490116","affiliates":"4","introducer":"0x1080355C93A1B4c0Dd3c340Eed4f7E514c583077"},
+{"eth":"29.84000062942505","affiliates":"3","introducer":"0xF22b286fdA7369255376742f360fFCEE4e1FBD42"},
+{"eth":"31.59999990463257","affiliates":"3","introducer":"0x45EE0A0db0E775AeCBebB300cCfC6486690B3287"},
+{"eth":"15","affiliates":"3","introducer":"0xF4e2FcD72b667B9f9E71bcE82069CD174348FD90"},
+{"eth":"3389.800000011921","affiliates":"3","introducer":"0xD8dE1f6764E442b8763d313722E9eaEe3779707E"},
+{"eth":"60","affiliates":"2","introducer":"0x6a9F813fb3e6a8f7013dabD1695bAE1d49aE8481"},
+{"eth":"65.50000095367432","affiliates":"2","introducer":"0xb4b10f0B0ac5a8E2B613D3DBE9505A07e3781128"},
+{"eth":"1914","affiliates":"2","introducer":"0x9A94771E7E73f9D8d6E880cfB12CAb4e9573C45E"},
+{"eth":"2.0800000429153442","affiliates":"2","introducer":"0xfadF736b86F09f2D07d2B655cfc848fe215140D4"},
+{"eth":"2","affiliates":"2","introducer":"0x2eC7947F3ac9AAaa44b53640506CDc9d848D9489"},
+{"eth":"299.9999938979745","affiliates":"2","introducer":"0xE552821eE85284249C71d4aBFc4437992Ed2FB93"},
+{"eth":"70","affiliates":"2","introducer":"0x2AAAF3e244B493F9F1e1A0Ec17ff344109900842"},
+{"eth":"14","affiliates":"2","introducer":"0xc78a748DcCBD806ae782EB3b8590ae7d162E5A90"},
+{"eth":"104.5","affiliates":"1","introducer":"0x95600d3C264e5b6B5bF0a7b346450E73F5Cd972E"},
+{"eth":"0.05000000074505806","affiliates":"1","introducer":"0x40f657E85bbb5CC7BeB402Da315C3fE1974442bF"},
+{"eth":"2","affiliates":"1","introducer":"0x1D32750e8a03443F008236f7C344Fc84821cF690"},
+{"eth":"0.10000000149011612","affiliates":"1","introducer":"0xe32c5673b152571E57976bF3A75068917DA2Da9C"},
+{"eth":"2","affiliates":"1","introducer":"0x7b4D4ba1070c4562c568fEd6280C800a68FA5427"},
+{"eth":"1","affiliates":"1","introducer":"0x0fbB89875A0cb732437b63740F4d4F265AC727f1"},
+{"eth":"0.5","affiliates":"1","introducer":"0x7136aDC702E26C13158284C4b0FCfF66Fa52c99B"},
+{"eth":"33.650001525878906","affiliates":"1","introducer":"0xa6AB73d38F67c873fC8e0D54c30A25eD4255b5cB"},
+{"eth":"50","affiliates":"1","introducer":"0xDb422897f0F0D3f33845545F691Eac4501799a4d"},
+{"eth":"1","affiliates":"1","introducer":"0x0dEf9b4811E4c4E9Da5ACF82d421C97B5E9C152F"},
+{"eth":"20","affiliates":"1","introducer":"0x296F0063BdD07Be8cba2f5183592574e0d62eFCa"},
+{"eth":"10","affiliates":"1","introducer":"0x2ECd81E43C1F66185446F4af7DfEAa6AAE249f55"},
+{"eth":"0.699999988079071","affiliates":"1","introducer":"0xfa6fd86B42Ce2EC5E00C1cD35FB0C78bd88C0417"},
+{"eth":"1.2000000476837158","affiliates":"1","introducer":"0x16617c3dc6cb3d3adc5471153520cb9c9A4A0498"},
+{"eth":"400","affiliates":"1","introducer":"0x8E7fCc7A17f00f0f5f85F2D5964A581D0813c8A6"},
+{"eth":"10","affiliates":"1","introducer":"0xfF3fc772434505ABff38EEcDe3C689D4b0254528"}
+];
+
+// Create axes
+var categoryAxis = refs.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "introducer";
+categoryAxis.numberFormatter.numberFormat = "#";
+categoryAxis.renderer.inversed = true;
+categoryAxis.renderer.labels.template.disabled = true;
+categoryAxis.tooltip.disabled = true;
+//categoryAxis.title.text = "Introducer";
+var  valueAxis = refs.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis.title.text = "Affiliates";
+
+// Create series
+var refsseries = refs.series.push(new am4charts.ColumnSeries());
+refsseries.dataFields.valueX = "affiliates";
+refsseries.dataFields.categoryY = "introducer";
+refsseries.name = "Referrals";
+refsseries.columns.template.propertyFields.fill = "color";
+refsseries.columns.template.tooltipHTML = "<span style='font-size:14px'><b>{introducer}</b><br> {valueX} Affiliates</span>";
+
+//refs.scrollbarX = new am4core.Scrollbar();
+refs.scrollbarY = new am4core.Scrollbar();
+
+//Refs ETH
+//Bar Chart Introducers vs Referrals
+var refseth = am4core.create("refseth", am4charts.XYChart);
+refseth.numberFormatter.numberFormat = "#a";
+refseth.numberFormatter.bigNumberPrefixes = [
+  { "number": 1e+3, "suffix": "K" },
+  { "number": 1e+6, "suffix": "M" },
+  { "number": 1e+9, "suffix": "B" }
+];
+// Add cursor
+refseth.cursor = new am4charts.XYCursor();
+// Add data
+refseth.data = [
+{"eth":"31195.33891414106","affiliates":"1577","introducer":"0x2d165E5191EF0674dA2637b421A765BDb1F8d346"},
+{"eth":"10585.824927894399","affiliates":"373","introducer":"0x6C7e7fbFa69f4B5A5Ade1C27BC74fa4290a3b8A3"},
+{"eth":"3909.390141995391","affiliates":"749","introducer":"0xF5d7D97B33C4090a8CAce5F7C5a1CC54C5740930"},
+{"eth":"3876.8550028000027","affiliates":"93","introducer":"0x2411605A576fe058483382C1db691318056eBaaD"},
+{"eth":"3389.800000011921","affiliates":"3","introducer":"0xD8dE1f6764E442b8763d313722E9eaEe3779707E"},
+{"eth":"3163.729643834755","affiliates":"275","introducer":"0xea8dd9381571D618119912AF553CE81c3c0dFF12"},
+{"eth":"1914","affiliates":"2","introducer":"0x9A94771E7E73f9D8d6E880cfB12CAb4e9573C45E"},
+{"eth":"1158.2150004524738","affiliates":"40","introducer":"0x81042f7F99a86D3981308E72feb36BD791C31920"},
+{"eth":"1113.0540985632688","affiliates":"111","introducer":"0x29C176BC50433D65113A2e6776b595a3DE04F92f"},
+{"eth":"1097.2310001403093","affiliates":"186","introducer":"0xA451FD5Fcc0D389e0C27FF22845c0e17153f7Dc8"},
+{"eth":"985.9500000476837","affiliates":"8","introducer":"0x23C6f263AdFb998F16a3d95f9C0D4D2024003156"},
+{"eth":"869.280000269413","affiliates":"142","introducer":"0x9498dB340A3ecab7Bb0973ee36e95E58C8E58a41"},
+{"eth":"626.7750002145767","affiliates":"48","introducer":"0x3937B5F83f8e3DB413bD202bAf4da5A64879690F"},
+{"eth":"553.0000000149012","affiliates":"16","introducer":"0x01734005354d569716291cD1CFbc67f3f56a0b6F"},
+{"eth":"400","affiliates":"1","introducer":"0x8E7fCc7A17f00f0f5f85F2D5964A581D0813c8A6"},
+{"eth":"299.9999938979745","affiliates":"2","introducer":"0xE552821eE85284249C71d4aBFc4437992Ed2FB93"},
+{"eth":"104.5","affiliates":"1","introducer":"0x95600d3C264e5b6B5bF0a7b346450E73F5Cd972E"},
+{"eth":"70","affiliates":"2","introducer":"0x2AAAF3e244B493F9F1e1A0Ec17ff344109900842"},
+{"eth":"65.50000095367432","affiliates":"2","introducer":"0xb4b10f0B0ac5a8E2B613D3DBE9505A07e3781128"},
+{"eth":"64.48999996483326","affiliates":"4","introducer":"0xd8068f813c45C88CEBb02cBC0F91F95626Ec9a34"},
+{"eth":"60","affiliates":"2","introducer":"0x6a9F813fb3e6a8f7013dabD1695bAE1d49aE8481"},
+{"eth":"50","affiliates":"1","introducer":"0xDb422897f0F0D3f33845545F691Eac4501799a4d"},
+{"eth":"33.650001525878906","affiliates":"1","introducer":"0xa6AB73d38F67c873fC8e0D54c30A25eD4255b5cB"},
+{"eth":"31.59999990463257","affiliates":"3","introducer":"0x45EE0A0db0E775AeCBebB300cCfC6486690B3287"},
+{"eth":"29.84000062942505","affiliates":"3","introducer":"0xF22b286fdA7369255376742f360fFCEE4e1FBD42"},
+{"eth":"20","affiliates":"1","introducer":"0x296F0063BdD07Be8cba2f5183592574e0d62eFCa"},
+{"eth":"15","affiliates":"3","introducer":"0xF4e2FcD72b667B9f9E71bcE82069CD174348FD90"},
+{"eth":"14","affiliates":"2","introducer":"0xc78a748DcCBD806ae782EB3b8590ae7d162E5A90"},
+{"eth":"10.100000001490116","affiliates":"4","introducer":"0x1080355C93A1B4c0Dd3c340Eed4f7E514c583077"},
+{"eth":"10","affiliates":"1","introducer":"0x2ECd81E43C1F66185446F4af7DfEAa6AAE249f55"},
+{"eth":"10","affiliates":"1","introducer":"0xfF3fc772434505ABff38EEcDe3C689D4b0254528"},
+{"eth":"2.0800000429153442","affiliates":"2","introducer":"0xfadF736b86F09f2D07d2B655cfc848fe215140D4"},
+{"eth":"2","affiliates":"1","introducer":"0x1D32750e8a03443F008236f7C344Fc84821cF690"},
+{"eth":"2","affiliates":"1","introducer":"0x7b4D4ba1070c4562c568fEd6280C800a68FA5427"},
+{"eth":"2","affiliates":"2","introducer":"0x2eC7947F3ac9AAaa44b53640506CDc9d848D9489"},
+{"eth":"1.2000000476837158","affiliates":"1","introducer":"0x16617c3dc6cb3d3adc5471153520cb9c9A4A0498"},
+{"eth":"1","affiliates":"1","introducer":"0x0fbB89875A0cb732437b63740F4d4F265AC727f1"},
+{"eth":"1","affiliates":"1","introducer":"0x0dEf9b4811E4c4E9Da5ACF82d421C97B5E9C152F"},
+{"eth":"0.699999988079071","affiliates":"1","introducer":"0xfa6fd86B42Ce2EC5E00C1cD35FB0C78bd88C0417"},
+{"eth":"0.5","affiliates":"1","introducer":"0x7136aDC702E26C13158284C4b0FCfF66Fa52c99B"},
+{"eth":"0.10000000149011612","affiliates":"1","introducer":"0xe32c5673b152571E57976bF3A75068917DA2Da9C"},
+{"eth":"0.05000000074505806","affiliates":"1","introducer":"0x40f657E85bbb5CC7BeB402Da315C3fE1974442bF"}
+];
+
+// Create axes
+var categoryAxis1 = refseth.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis1.dataFields.category = "introducer";
+categoryAxis1.numberFormatter.numberFormat = "#";
+categoryAxis1.renderer.inversed = true;
+categoryAxis1.renderer.labels.template.disabled = true;
+//categoryAxis1.title.text = "Introducer";
+var  valueAxis1 = refseth.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis1.title.text = "ETH";
+
+// Create series
+var refseseries = refseth.series.push(new am4charts.ColumnSeries());
+refseseries.dataFields.valueX = "eth";
+refseseries.dataFields.categoryY = "introducer";
+refseseries.name = "Referrals";
+refseseries.columns.template.propertyFields.fill = "color";
+refseseries.columns.template.tooltipHTML = "<span style='font-size:14px'><b>{valueX} ETH</b></span>";
+
+//refseth.scrollbarX = new am4core.Scrollbar();
+refseth.scrollbarY = new am4core.Scrollbar();
+
+//Pie Chart Distribution
+
+var chart = am4core.create("durationpie", am4charts.PieChart3D);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+  {
+    lock: "30 Days",
+    eth: 25974.30
+  },
+  {
+    lock: "100 Days",
+    eth: 49377.50
+  },
+  {
+    lock: "300 Days",
+    eth: 13576.40
+  },
+  {
+    lock: "1000 Days",
+    eth: 48324.80
+  }
+];
+
+var series = chart.series.push(new am4charts.PieSeries3D());
+series.dataFields.value = "eth";
+series.dataFields.category = "lock";
+//series.ticks.template.disabled = true;
+series.labels.template.text = "{category}";
+series.slices.template.tooltipHTML = "{category}<br><span style='font-size:14px'><b>{value.value} ETH</b> ({value.percent}%)</span>";
+
+}); // end am4core.ready()
+</script>
+
+</head>
+
+<body id="page-top" class="sidebar-toggled">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <!--<i class="fas fa-laugh-wink"></i>-->
+          <img src="img/PlasmSurf.png" width="100%">
+        </div>
+        <!--<div class="sidebar-brand-text mx-3"><sup>DeFI</sup></div>-->
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <!--<li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>-->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Lockdrop
+      </div>
+
+
+            <!-- Nav Item - Pools Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo1">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Lockdrop 1</span>
+        </a>
+        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <h6 class="collapse-header"><!--Select Pool:--></h6>
+            <a class="collapse-item" href="index.html">Stats</a>
+            <a class="collapse-item" href="browse.html">Browse</a>
+          </div>
+        </div>
+      </li>
+
+                  <!-- Nav Item - Pools Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo3" aria-expanded="true" aria-controls="collapseTwo3">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Lockdrop 2</span>
+        </a>
+        <div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <h6 class="collapse-header"><!--Select Pool:--></h6>
+            <a class="collapse-item" href="#">Stats</a>
+            <a class="collapse-item" href="browse-2.html">Browse</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Resources
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Official Links</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-light py-2 collapse-inner rounded">
+            <!--<h6 class="collapse-header">Login Screens:</h6>-->
+            <a class="collapse-item" href="https://www.plasmnet.io/" target="_blank">Website</a>
+            <a class="collapse-item" href="https://docs.plasmnet.io/" target="_blank">Docs</a>
+            <a class="collapse-item" href="https://medium.com/stake-technologies" target="_blank">Blog</a>
+            <a class="collapse-item" href="https://github.com/staketechnologies/Plasm" target="_blank">GitHub</a>
+           
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Social</h6>
+            <a class="collapse-item" href="https://discordapp.com/invite/Dnfn5eT" target="_blank">Discord</a>
+            <a class="collapse-item" href="https://t.me/PlasmOfficial" target="_blank">Telegram</a>
+            <a class="collapse-item" href="https://twitter.com/Plasm_Network" target="_blank">Twitter</a>
+          </div>
+        </div>
+      </li>
+
+
+      <!-- Nav Item - Tables 
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li>-->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search 
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>-->
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Alerts 
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>-->
+                <!-- Counter - Alerts 
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>-->
+              <!-- Dropdown - Alerts 
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>-->
+
+
+            <!--<div class="topbar-divider d-none d-sm-block"></div>-->
+
+            <!-- Nav Item - User Information 
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">0xf751 ... 577c</span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+              </a>-->
+              <!-- Dropdown - User Information 
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="https://twitter.com/intent/tweet?screen_name=98farhan94&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @98farhan94</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </li>-->
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-dark">Overview</h1>
+            <!--<<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plug fa-sm text-white-50"></i> &nbsp;Connect Wallet</a>-->
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Participants</div>
+                      <div class="h5 mb-0 font-weight-bold text-primary" id="price">6,042</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Locks</div>
+                      <div class="h5 mb-0 font-weight-bold text-success" id="volume">9,325</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-user-lock fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">ETH Contributed</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-info" id="circulating">137,252.99</div>
+                        </div>
+                        <div class="col">
+                        <!--  <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fab fa-ethereum fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card bg-light border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">PLM Distributed</div>
+                      <div class="h5 mb-0 font-weight-bold text-warning" id="marketcap">13,028,407,978</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-coins fa-2x text-black"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+              <div class="card bg-light shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-warning">Total ETH Locked</h6>
+                  <!--<div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>-->
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div id="controls"></div>
+                    <div id="mchart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Lock Duration</h6>
+                </div>
+                <div class="card-body">
+                  <div id="durationpie"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Locks Over Time</h6>
+                </div>
+                <div class="card-body">
+                    <div id="wchart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Content Row -->
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Top 20 Lockers</h6>
+                </div>
+                <div class="card-body">
+                  <div id="top20"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Distribution</h6>
+                </div>
+                <div class="card-body">
+                    <div id="radar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Content Row -->
+            <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h2 class="h3 mb-0 text-dark">Introducers</h2>
+        <!--<<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plug fa-sm text-white-50"></i> &nbsp;Connect Wallet</a>-->
+      </div>
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Number of Affiliates</h6>
+                </div>
+                <div class="card-body">
+                  <div id="refs"></div>
+                </div>
+              </div>
+        </div>
+
+               <div class="col-lg-6 mb-4">
+
+              <!-- Illustrations -->
+              <div class="card bg-light shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">Amount of ETH Referred</h6>
+                </div>
+                <div class="card-body">
+                  <div id="refseth"></div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-light">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 2020 DeFi.SURF</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <!--<script src="js/web3.min.js"></script>-->
+
+  <!-- Page level plugins -->
+  <!--  <script src="vendor/chart.js/Chart.min.js"></script>-->
+
+  <!-- Page level custom scripts -->
+  <script>
+    //http://pushservice.curve.fi/pools
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4795921-11"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-4795921-11');
+</script>
+
+
+</body>
+
+</html>
